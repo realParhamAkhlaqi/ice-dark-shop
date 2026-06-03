@@ -82,5 +82,5 @@ python3 manage.py runserver
 ```
 
 Open <http://127.0.0.1:8000> in your browser.
-
+This project is based on https://github.com/erfanghorbanee/Django-Ecommerce under MIT license. I redesigned the entire frontend and added dark/light theme functionality.
 ⚖️ Licensed under the MIT License by Parham Akhlaqi (@realParhamAkhlaqi).
