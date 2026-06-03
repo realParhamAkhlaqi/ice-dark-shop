@@ -1,0 +1,556 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% block title %}تأیید ایمیل{% endblock %}
+
+{% block style %}
+/* ============================================
+   ICE-DARK PALETTE (Nothing Phone Style)
+   Verify Email Page
+   ============================================ */
+
+:root {
+    --bg-primary: #000000;
+    --bg-card: #121212;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E93;
+    --accent-powder: #E0F2FE;
+    --accent-metallic: #B9E6FF;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    font-family: 'Shabnam', 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+/* Main Container */
+.verify-container {
+    max-width: 600px;
+    width: 90%;
+    margin: 60px auto;
+    animation: fadeInUp 0.5s ease;
+}
+
+/* Card Style */
+.verify-card {
+    background: var(--bg-card);
+    padding: 50px 40px;
+    border-radius: 32px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(224, 242, 254, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Icon */
+.verify-icon {
+    margin-bottom: 30px;
+}
+
+.verify-icon svg {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Headings */
+h1 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+    letter-spacing: -0.02em;
+    line-height: 1.4;
+}
+
+/* Message Box */
+.message-box {
+    background: rgba(224, 242, 254, 0.05);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 25px 0;
+}
+
+.message-box p {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.message-box p:last-child {
+    margin-bottom: 0;
+}
+
+/* Highlight Text */
+.highlight-text {
+    color: var(--accent-powder);
+    font-weight: 500;
+}
+
+/* Info Box */
+.info-box {
+    background: rgba(185, 230, 255, 0.08);
+    border: 1px solid rgba(185, 230, 255, 0.2);
+    border-radius: 20px;
+    padding: 20px;
+    margin: 25px 0;
+    text-align: right;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    text-align: right;
+}
+
+.info-item:last-child {
+    margin-bottom: 0;
+}
+
+.info-item svg {
+    flex-shrink: 0;
+}
+
+.info-item p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Button */
+.btn {
+    border-radius: 40px;
+    padding: 12px 28px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: transparent;
+    border: 1px solid var(--accent-powder);
+    color: var(--text-primary);
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.btn:hover {
+    background-color: var(--accent-metallic);
+    border-color: var(--accent-metallic);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    border-color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--text-secondary);
+    border-color: var(--text-secondary);
+    color: var(--bg-primary);
+}
+
+/* Back Link */
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-top: 25px;
+    transition: all 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--accent-powder);
+}
+
+/* Resend Section */
+.resend-section {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(142, 142, 147, 0.15);
+}
+
+.resend-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .verify-card {
+        padding: 35px 25px;
+    }
+    
+    h1 {
+        font-size: 1.3rem;
+    }
+    
+    .info-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+    
+    .message-box {
+        padding: 20px;
+    }
+}
+
+/* Loading State */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-loading:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 15px;
+    margin-top: -8px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Glow effect on card */
+.verify-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.verify-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(224, 242, 254, 0.03) 0%, transparent 70%);
+    animation: rotate 20s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Ripple effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Alert Messages */
+.alert {
+    border-radius: 16px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.alert-success {
+    background-color: rgba(185, 230, 255, 0.1);
+    border: 1px solid var(--accent-metallic);
+    color: var(--accent-metallic);
+}
+
+.alert-info {
+    background-color: rgba(142, 142, 147, 0.1);
+    border: 1px solid var(--text-secondary);
+    color: var(--text-secondary);
+}
+{% endblock %}
+
+{% block header %}
+    <nav class="navbar navbar-expand-md navbar-dark" style="background-color: var(--bg-card); border-bottom: 1px solid rgba(142, 142, 147, 0.15); backdrop-filter: blur(10px); padding: 1rem 1.5rem;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url 'home' %}" style="color: var(--text-primary); font-weight: 500;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16" style="margin-left: 8px;">
+                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                </svg>
+                بازگشت به صفحه اصلی
+            </a>
+        </div>
+    </nav>
+{% endblock %}
+
+{% block content %}
+<div class="verify-container">
+    <div class="verify-card">
+        <div class="verify-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 6L12 13L2 6M22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6M22 6L12 13L2 6" stroke="#E0F2FE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 6L12 13L22 6" stroke="#B9E6FF" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="13" r="2" fill="#E0F2FE" stroke="#E0F2FE" stroke-width="1.5"/>
+            </svg>
+        </div>
+        
+        <h1>📧 تأیید ایمیل</h1>
+        
+        <div class="message-box">
+            <p>لطفاً پیش از ورود، <span class="highlight-text">ایمیل خود را تأیید کنید</span>.</p>
+            <p>یک ایمیل حاوی لینک فعال‌سازی حساب کاربری‌تان به آدرس ثبت‌شده ارسال شده است.</p>
+        </div>
+        
+        <div class="info-box">
+            <div class="info-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 12V8H16M20 12L12 4M20 12L12 20" stroke="#E0F2FE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 12H16M16 12L12 8M16 12L12 16" stroke="#E0F2FE" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <p>✅ روی لینک موجود در ایمیل کلیک کنید تا حساب شما فعال شود</p>
+            </div>
+            <div class="info-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 8V12M12 16H12.01M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#8E8E93" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <p>📬 صندوق ورودی ایمیل خود را بررسی کنید (حتماً پوشه Spam را هم چک کنید)</p>
+            </div>
+            <div class="info-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="#8E8E93" stroke-width="1.5"/>
+                    <path d="M12 6V12L16 14" stroke="#E0F2FE" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+                <p>⏱️ لینک فعال‌سازی برای مدت محدودی معتبر است</p>
+            </div>
+        </div>
+        
+        <div class="resend-section">
+            <p class="resend-text">ایمیل فعال‌سازی را دریافت نکرده‌اید؟</p>
+            <a href="#" class="btn btn-secondary" id="resend-btn">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12C1 12 5 4 12 4C19 4 23 12 23 12C23 12 19 20 12 20C5 20 1 12 1 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+                ارسال مجدد لینک فعال‌سازی
+            </a>
+        </div>
+        
+        <a href="{% url 'account_login' %}" class="back-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            بازگشت به صفحه ورود
+        </a>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Resend verification email
+        $('#resend-btn').on('click', function(e) {
+            e.preventDefault();
+            
+            var $btn = $(this);
+            var originalText = $btn.html();
+            
+            // Show loading state
+            $btn.html(`
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; animation: spin 0.8s linear infinite;">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="31.4 31.4"/>
+                </svg>
+                در حال ارسال...
+            `).addClass('btn-loading').prop('disabled', true);
+            
+            // Simulate AJAX request (replace with actual endpoint)
+            setTimeout(function() {
+                // Show success message
+                showNotification('لینک فعال‌سازی مجدداً به ایمیل شما ارسال شد.', 'success');
+                
+                // Reset button
+                $btn.html(originalText).removeClass('btn-loading').prop('disabled', false);
+            }, 1500);
+            
+            // Actual AJAX implementation (uncomment when endpoint is ready)
+            /*
+            $.ajax({
+                url: "/account/resend-verification/",
+                type: "POST",
+                headers: { "X-CSRFToken": getCsrfToken() },
+                success: function(response) {
+                    showNotification('لینک فعال‌سازی مجدداً به ایمیل شما ارسال شد.', 'success');
+                    $btn.html(originalText).removeClass('btn-loading').prop('disabled', false);
+                },
+                error: function() {
+                    showNotification('خطا در ارسال مجدد. لطفاً دوباره تلاش کنید.', 'error');
+                    $btn.html(originalText).removeClass('btn-loading').prop('disabled', false);
+                }
+            });
+            */
+        });
+        
+        // Show notification function
+        function showNotification(message, type) {
+            $('.ice-notification').remove();
+            
+            var colors = {
+                success: '#B9E6FF',
+                error: '#FF6B6B',
+                info: '#E0F2FE'
+            };
+            
+            var notification = $(`
+                <div class="ice-notification" style="
+                    position: fixed;
+                    bottom: 20px;
+                    right: 20px;
+                    background-color: var(--bg-card);
+                    border: 1px solid ${colors[type]};
+                    border-radius: 16px;
+                    padding: 14px 24px;
+                    color: var(--text-primary);
+                    z-index: 10000;
+                    backdrop-filter: blur(10px);
+                    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+                    animation: slideInRight 0.3s ease;
+                    font-family: 'Shabnam', sans-serif;
+                ">
+                    ${message}
+                </div>
+            `);
+            
+            $('body').append(notification);
+            
+            setTimeout(function() {
+                notification.fadeOut(300, function() {
+                    $(this).remove();
+                });
+            }, 4000);
+        }
+        
+        // Get CSRF token
+        function getCsrfToken() {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, 10) === 'csrftoken=') {
+                        cookieValue = decodeURIComponent(cookie.substring(10));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+        // Add ripple effect
+        $('.btn, .back-link, .navbar-brand').on('click', function(e) {
+            if ($(this).hasClass('btn-loading')) return;
+            
+            var $this = $(this);
+            var ripple = $('<span class="ripple"></span>');
+            
+            ripple.css({
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                background: 'radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 80%)',
+                borderRadius: '40px',
+                transform: 'scale(0)',
+                opacity: 1,
+                pointerEvents: 'none',
+                left: '0',
+                top: '0'
+            });
+            
+            $this.css('position', 'relative');
+            $this.append(ripple);
+            
+            ripple.animate({
+                transform: 'scale(4)',
+                opacity: 0
+            }, 400, function() {
+                ripple.remove();
+            });
+        });
+    });
+</script>
+
+<style>
+    @keyframes slideInRight {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    .ice-notification {
+        direction: rtl;
+    }
+</style>
+{% endblock %}

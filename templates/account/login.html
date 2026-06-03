@@ -1,0 +1,469 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% bootstrap_messages %}
+
+{% block title %}ورود به حساب کاربری{% endblock %}
+
+{% block style %}
+/* ============================================
+   ICE-DARK PALETTE (Nothing Phone Style)
+   Sign In Page Styles
+   ============================================ */
+
+:root {
+    --bg-primary: #000000;
+    --bg-card: #121212;
+    --text-primary: #FFFFFF;
+    --text-secondary: #8E8E93;
+    --accent-powder: #E0F2FE;
+    --accent-metallic: #B9E6FF;
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-secondary);
+    font-family: 'Shabnam', 'Inter', sans-serif;
+}
+
+.content {
+    text-align: center;
+    padding: 60px 20px;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.signin-container {
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+    animation: fadeInUp 0.5s ease;
+}
+
+.signin {
+    background: var(--bg-card);
+    padding: 40px 35px;
+    border-radius: 28px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(224, 242, 254, 0.1);
+}
+
+/* Form Fields */
+input, .btn {
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.form-group {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+input {
+    background-color: var(--bg-primary);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 16px;
+    color: var(--text-primary);
+    padding: 12px 16px;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-powder);
+    box-shadow: 0 0 0 3px rgba(224, 242, 254, 0.1);
+}
+
+input:hover {
+    border-color: rgba(224, 242, 254, 0.4);
+}
+
+/* Links */
+a {
+    font-size: 13px;
+    color: var(--accent-powder);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: inline-block;
+}
+
+a:focus {
+    outline: none !important;
+}
+
+a:hover {
+    text-decoration: none;
+    color: var(--accent-metallic);
+    transform: translateX(-4px);
+}
+
+/* Headings */
+h1 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.02em;
+}
+
+/* Navbar */
+.navbar-custom {
+    background-color: var(--bg-card) !important;
+    border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+    backdrop-filter: blur(10px);
+    padding: 1rem 1.5rem;
+}
+
+.navbar-custom a {
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+}
+
+.navbar-custom a:hover {
+    color: var(--accent-powder);
+}
+
+/* Footer */
+footer {
+    background-color: var(--bg-card) !important;
+    color: var(--text-secondary);
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid rgba(142, 142, 147, 0.15);
+    margin-top: 60px;
+}
+
+footer a {
+    color: var(--accent-powder);
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: var(--accent-metallic);
+    text-decoration: none;
+}
+
+/* Button Styles */
+.btn {
+    border-radius: 40px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    letter-spacing: -0.2px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.btn-dark {
+    background-color: transparent;
+    border: 1px solid var(--accent-powder);
+    color: var(--text-primary);
+}
+
+.btn-dark:hover {
+    background-color: var(--accent-metallic);
+    border-color: var(--accent-metallic);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+}
+
+/* Error Messages */
+.alert {
+    border-radius: 16px;
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    backdrop-filter: blur(10px);
+}
+
+.alert-danger {
+    background-color: rgba(255, 107, 107, 0.1);
+    border: 1px solid #FF6B6B;
+    color: #FF6B6B;
+}
+
+.alert-success {
+    background-color: rgba(185, 230, 255, 0.1);
+    border: 1px solid var(--accent-metallic);
+    color: var(--accent-metallic);
+}
+
+/* Separator */
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid rgba(142, 142, 147, 0.2);
+}
+
+.separator::before {
+    margin-right: 10px;
+}
+
+.separator::after {
+    margin-left: 10px;
+}
+
+/* Link Container */
+.links-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(142, 142, 147, 0.1);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Checkbox Styling (Remember Me) */
+input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-powder);
+    margin-left: 8px;
+    display: inline-block;
+    width: auto;
+}
+
+.form-check {
+    display: flex;
+    align-items: center;
+    text-align: right;
+}
+
+.form-check label {
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .signin {
+        padding: 30px 20px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .content {
+        padding: 40px 15px;
+    }
+    
+    .links-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    a:hover {
+        transform: translateX(0);
+    }
+}
+
+/* Loading State for Button */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.btn-loading:after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 50%;
+    left: 15px;
+    margin-top: -8px;
+    border: 2px solid var(--text-primary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Helptext styling */
+.helptext {
+    font-size: 11px;
+    color: var(--text-secondary);
+    display: block;
+    margin-top: 5px;
+}
+
+/* Error list styling */
+.errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    color: #FF6B6B;
+    font-size: 12px;
+}
+
+.errorlist li {
+    margin-bottom: 3px;
+}
+{% endblock %}
+
+{% block header %}
+<nav class="navbar navbar-expand-md navbar-dark navbar-custom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16" style="margin-left: 8px;">
+        <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+      </svg>
+      بازگشت به صفحه اصلی
+    </a>
+  </div>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <h1>✨ ورود به حساب کاربری</h1>
+    <div class="signin-container">
+        <form class="signin" method="POST" action="{% url 'account_login' %}" id="login-form">
+            {% csrf_token %}
+            
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger">
+                    {% for error in form.non_field_errors %}
+                        {{ error }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            
+            {% for field in form %}
+                {% if field.name != 'remember' %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="helptext">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% if field.errors %}
+                            <ul class="errorlist">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+            
+            {% if form.remember %}
+                <div class="form-group form-check">
+                    {{ form.remember }}
+                    <label class="form-check-label" for="{{ form.remember.id_for_label }}">
+                        مرا به خاطر بسپار
+                    </label>
+                </div>
+            {% endif %}
+
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <button class="btn btn-dark" type="submit" id="login-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16" style="margin-left: 8px;">
+                    <path fill-rule="evenodd" d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z"/>
+                    <path fill-rule="evenodd" d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"/>
+                </svg>
+                ورود
+            </button>
+            
+            <div class="separator">یا</div>
+            
+            <div class="links-container">
+                <a href="{% url 'account_reset_password' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16" style="margin-left: 5px;">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-1.993 0-1.536-1.212-2.353-2.672-2.353-1.664 0-2.63.897-2.73 1.934z"/>
+                    </svg>
+                    فراموشی رمز عبور
+                </a>
+                <a href="{% url 'account_signup' %}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-person-plus" viewBox="0 0 16 16" style="margin-left: 5px;">
+                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                        <path fill-rule="evenodd" d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                    عضو نیستید؟ ثبت نام کنید
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+<script>
+    $(document).ready(function() {
+        // Add loading state to login button
+        $('#login-form').on('submit', function() {
+            var $btn = $('#login-btn');
+            $btn.html(`
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; animation: spin 0.8s linear infinite; margin-left: 8px;">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none" stroke-dasharray="31.4 31.4"/>
+                </svg>
+                در حال ورود...
+            `).addClass('btn-loading').prop('disabled', true);
+        });
+        
+        // Add floating label effect
+        $('.form-group input').each(function() {
+            var $input = $(this);
+            if ($input.val() && $input.val().trim() !== '') {
+                $input.siblings('label').addClass('floating');
+            }
+            
+            $input.on('focus', function() {
+                $(this).siblings('label').addClass('floating');
+            });
+            
+            $input.on('blur', function() {
+                if (!$input.val() || $input.val().trim() === '') {
+                    $(this).siblings('label').removeClass('floating');
+                }
+            });
+        });
+    });
+</script>
+{% endblock %}

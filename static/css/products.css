@@ -1,0 +1,349 @@
+/* ============================================
+   ICE-DARK PALETTE (Nothing Phone Style)
+   Additional Global Styles
+   ============================================ */
+
+/* Base Body */
+body {
+    margin-bottom: 65px;
+    background-color: var(--bg-primary, #000000);
+    color: var(--text-secondary, #8E8E93);
+}
+
+header {
+    margin-bottom: 80px;
+}
+
+.form-label {
+    margin-left: 10px;
+    color: var(--text-secondary, #8E8E93);
+}
+
+/* Typography - Nothing Phone Style */
+.h1 {
+    font-family: 'Shabnam', 'Roboto', sans-serif;
+    font-size: 48px !important;
+    font-weight: 300 !important;
+    color: var(--text-primary, #FFFFFF);
+    letter-spacing: -0.02em;
+}
+
+.h2 {
+    font-family: 'Shabnam', 'Roboto', sans-serif;
+    font-size: 30px !important;
+    font-weight: 400;
+    color: var(--text-primary, #FFFFFF);
+    letter-spacing: -0.02em;
+}
+
+.h3 {
+    font-family: 'Shabnam', 'Roboto', sans-serif;
+    font-size: 22px !important;
+    color: var(--text-primary, #FFFFFF);
+}
+
+/* General */
+.logo {
+    font-weight: 600 !important;
+    color: var(--text-primary, #FFFFFF);
+}
+
+.text-warning {
+    color: var(--accent-powder, #E0F2FE) !important;
+}
+
+.text-muted {
+    color: var(--text-secondary, #8E8E93) !important;
+}
+
+.text-success {
+    color: var(--accent-metallic, #B9E6FF) !important;
+}
+
+.text-light {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Background Colors - Ice Dark */
+.bg-dark {
+    background-color: var(--bg-card, #121212) !important;
+}
+
+.bg-light {
+    background-color: var(--bg-primary, #000000) !important;
+}
+
+.bg-black {
+    background-color: var(--bg-card, #121212) !important;
+}
+
+/* Primary Button */
+.btn-primary {
+    background-color: transparent !important;
+    border: 1px solid var(--accent-powder, #E0F2FE) !important;
+    color: var(--text-primary, #FFFFFF) !important;
+    border-radius: 40px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--accent-metallic, #B9E6FF) !important;
+    border-color: var(--accent-metallic, #B9E6FF) !important;
+    color: var(--bg-primary, #000000) !important;
+    transform: translateY(-2px);
+}
+
+/* Pagination */
+.pagination .page-link {
+    background-color: var(--bg-card, #121212);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    color: var(--text-secondary, #8E8E93);
+    border-radius: 12px;
+    margin: 0 4px;
+    transition: all 0.2s ease;
+}
+
+.pagination .page-link:hover {
+    background-color: var(--accent-metallic, #B9E6FF);
+    border-color: var(--accent-metallic, #B9E6FF);
+    color: var(--bg-primary, #000000);
+}
+
+.pagination .page-link.active {
+    background-color: var(--accent-powder, #E0F2FE);
+    border-color: var(--accent-powder, #E0F2FE);
+    color: var(--bg-primary, #000000);
+}
+
+/* Hero Carousel */
+#template-mo-zay-hero-carousel {
+    background: var(--bg-card, #121212) !important;
+}
+
+/* Accordion */
+.templatemo-accordion a {
+    color: var(--text-secondary, #8E8E93);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.templatemo-accordion a:hover {
+    color: var(--accent-powder, #E0F2FE);
+}
+
+/* Shop */
+.shop-top-menu a:hover {
+    color: var(--accent-metallic, #B9E6FF) !important;
+}
+
+/* Product Card - Ice Dark Style */
+.product-wap {
+    background-color: var(--bg-card, #121212);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.product-wap:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(224, 242, 254, 0.1);
+}
+
+/* Product Color Dots */
+.product-wap .product-color-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 4px;
+    transition: transform 0.2s ease;
+}
+
+.product-wap .product-color-dot:hover {
+    transform: scale(1.2);
+}
+
+.product-wap .product-color-dot.color-dot-red {
+    background: #ff4444;
+}
+
+.product-wap .product-color-dot.color-dot-blue {
+    background: var(--accent-powder, #E0F2FE);
+}
+
+.product-wap .product-color-dot.color-dot-black {
+    background: var(--text-primary, #FFFFFF);
+}
+
+.product-wap .product-color-dot.color-dot-light {
+    background: #cccccc;
+}
+
+.product-wap .product-color-dot.color-dot-green {
+    background: var(--accent-metallic, #B9E6FF);
+}
+
+/* Product Overlay */
+.card.product-wap .card .product-overlay {
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.card.product-wap:hover .card .product-overlay {
+    visibility: visible;
+    opacity: 1;
+}
+
+.card.product-wap a {
+    color: var(--text-primary, #FFFFFF);
+    text-decoration: none;
+}
+
+.card.product-wap a:hover {
+    color: var(--accent-powder, #E0F2FE);
+}
+
+/* Carousel Related Product */
+#carousel-related-product .slick-slide:focus {
+    outline: none !important;
+}
+
+#carousel-related-product .slick-dots li button:before {
+    font-size: 15px;
+    margin-top: 20px;
+    color: var(--text-secondary, #8E8E93);
+}
+
+#carousel-related-product .slick-dots li.slick-active button:before {
+    color: var(--accent-powder, #E0F2FE);
+}
+
+/* Product Text Sizes */
+.product-wap .h3,
+.product-wap li,
+.product-wap i,
+.product-wap p {
+    font-size: 12px !important;
+    color: var(--text-secondary, #8E8E93);
+}
+
+.product-wap .h3 {
+    color: var(--text-primary, #FFFFFF);
+}
+
+/* Responsive Breakpoints */
+@media (min-width: 576px) {
+    .tempaltemo-carousel .h1 {
+        font-size: 1.5em !important;
+    }
+}
+
+@media (min-width: 768px) {
+    #templatemo_main_nav .navbar-nav {
+        max-width: 450px;
+    }
+}
+
+@media (min-width: 992px) {
+    #templatemo_main_nav .navbar-nav {
+        max-width: 550px;
+    }
+    
+    #template-mo-zay-hero-carousel .carousel-item {
+        min-height: 30rem !important;
+    }
+    
+    .product-wap .h3,
+    .product-wap li,
+    .product-wap i,
+    .product-wap p {
+        font-size: 16px !important;
+    }
+    
+    .product-wap .product-color-dot {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .product-wap .h3,
+    .product-wap li,
+    .product-wap i,
+    .product-wap p {
+        font-size: 18px !important;
+    }
+    
+    .product-wap .product-color-dot {
+        width: 12px;
+        height: 12px;
+    }
+}
+
+/* Product Details Page */
+.product-color-dots {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+/* Rating Stars */
+.rating-stars {
+    color: var(--accent-powder, #E0F2FE);
+}
+
+/* Quantity Selector */
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-btn {
+    background-color: var(--bg-card, #121212);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 12px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background-color: var(--accent-metallic, #B9E6FF);
+    border-color: var(--accent-metallic, #B9E6FF);
+    color: var(--bg-primary, #000000);
+}
+
+/* Price Styling */
+.price-current {
+    color: var(--accent-powder, #E0F2FE);
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.price-old {
+    color: var(--text-secondary, #8E8E93);
+    text-decoration: line-through;
+    font-size: 0.9rem;
+    margin-right: 10px;
+}
+
+/* Badge */
+.badge-primary {
+    background-color: var(--accent-powder, #E0F2FE);
+    color: var(--bg-primary, #000000);
+    border-radius: 30px;
+    padding: 4px 12px;
+}
+
+.badge-secondary {
+    background-color: var(--bg-card, #121212);
+    color: var(--text-secondary, #8E8E93);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 30px;
+}

@@ -1,0 +1,313 @@
+/* ============================================
+   ICE-DARK PALETTE (Nothing Phone Style)
+   Additional Global Styles
+   ============================================ */
+
+/* DL Small */
+.dl-small {
+    margin-bottom: 4px;
+}
+
+/* Body */
+body {
+    margin: 0 auto;
+    padding: 1em;
+    background-color: var(--bg-primary, #000000);
+    color: var(--text-secondary, #8E8E93);
+}
+
+/* Form Controls */
+.form-control {
+    width: auto;
+    background-color: var(--bg-primary, #000000);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 12px;
+    color: var(--text-primary, #FFFFFF);
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--accent-powder, #E0F2FE);
+    box-shadow: 0 0 0 2px rgba(224, 242, 254, 0.1);
+}
+
+.form-control-small {
+    width: 100px;
+}
+
+.form-control-large {
+    width: 310px;
+}
+
+/* Dropdown Item Danger */
+.dropdown-item.text-danger {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    color: var(--accent-powder, #E0F2FE) !important;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.dropdown-item.text-danger:hover {
+    color: var(--accent-metallic, #B9E6FF) !important;
+    background: none !important;
+}
+
+/* Avatar */
+.Avatar {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-right: 5px;
+    border: 1px solid rgba(224, 242, 254, 0.3);
+    object-fit: cover;
+    transition: all 0.2s ease;
+}
+
+.Avatar:hover {
+    border-color: var(--accent-powder, #E0F2FE);
+    transform: scale(1.05);
+}
+
+/* Login Link */
+.login {
+    margin-right: 25px;
+    margin-left: 5px;
+    color: var(--accent-powder, #E0F2FE);
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 40px;
+    border: 1px solid var(--accent-powder, #E0F2FE);
+    transition: all 0.2s ease;
+}
+
+.login:hover {
+    background-color: var(--accent-metallic, #B9E6FF);
+    color: var(--bg-primary, #000000);
+}
+
+/* Navbar Custom */
+.navbar-custom {
+    background-color: var(--bg-card, #121212) !important;
+    border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+    backdrop-filter: blur(10px);
+}
+
+/* Header */
+header {
+    margin-bottom: 100px;
+}
+
+/* Headings */
+h2 {
+    margin-top: 55px;
+    margin-bottom: 25px;
+    color: var(--text-primary, #FFFFFF);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Bank Logo */
+.bank_logo {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+}
+
+.bank_logo:hover {
+    transform: scale(1.02);
+}
+
+/* Large Button */
+.btn-lg {
+    margin-top: 20px;
+}
+
+/* Footer */
+footer {
+    margin-bottom: 80px;
+    color: var(--text-secondary, #8E8E93);
+}
+
+footer a {
+    color: var(--accent-powder, #E0F2FE);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+footer a:hover {
+    color: var(--accent-metallic, #B9E6FF);
+}
+
+/* Main Container */
+main {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Input Fields */
+input {
+    margin-bottom: 8px;
+    margin-top: 3px;
+    background-color: var(--bg-primary, #000000);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 12px;
+    color: var(--text-primary, #FFFFFF);
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--accent-powder, #E0F2FE);
+    box-shadow: 0 0 0 2px rgba(224, 242, 254, 0.1);
+}
+
+input:hover {
+    border-color: rgba(224, 242, 254, 0.4);
+}
+
+/* Select Dropdowns */
+select {
+    background-color: var(--bg-primary, #000000);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 12px;
+    color: var(--text-primary, #FFFFFF);
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--accent-powder, #E0F2FE);
+}
+
+select option {
+    background-color: var(--bg-card, #121212);
+    color: var(--text-primary, #FFFFFF);
+}
+
+/* Textarea */
+textarea {
+    background-color: var(--bg-primary, #000000);
+    border: 1px solid rgba(142, 142, 147, 0.2);
+    border-radius: 12px;
+    color: var(--text-primary, #FFFFFF);
+    padding: 10px 14px;
+    transition: all 0.2s ease;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-powder, #E0F2FE);
+    box-shadow: 0 0 0 2px rgba(224, 242, 254, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .form-control-large {
+        width: 100%;
+    }
+    
+    .form-control-small {
+        width: 80px;
+    }
+    
+    main {
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    h2 {
+        margin-top: 35px;
+        font-size: 1.5rem;
+    }
+    
+    header {
+        margin-bottom: 70px;
+    }
+    
+    footer {
+        margin-bottom: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-control-large {
+        width: 100%;
+    }
+    
+    .form-control-small {
+        width: 100%;
+    }
+    
+    .login {
+        margin-right: 15px;
+        margin-left: 0;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .Avatar {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Utility Classes for Dark Theme */
+.bg-card {
+    background-color: var(--bg-card, #121212);
+}
+
+.text-primary-custom {
+    color: var(--text-primary, #FFFFFF);
+}
+
+.text-secondary-custom {
+    color: var(--text-secondary, #8E8E93);
+}
+
+/* Checkout Specific - Radio Buttons */
+input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-powder, #E0F2FE);
+    margin-left: 8px;
+    cursor: pointer;
+}
+
+/* Checkout Specific - Labels */
+label {
+    color: var(--text-secondary, #8E8E93);
+    font-weight: 500;
+    margin-bottom: 5px;
+    display: inline-block;
+}
+
+/* List Group Items for Checkout */
+.list-group-item {
+    background-color: var(--bg-card, #121212);
+    border: none;
+    border-radius: 16px;
+    margin-bottom: 12px;
+    padding: 20px;
+    transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+    background-color: #1a1a1a;
+    transform: translateX(-4px);
+}
+
+/* Well / Container */
+.well {
+    background-color: var(--bg-card, #121212);
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 20px;
+}
