@@ -1,0 +1,506 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Awesome Shop - Best place to buy everything you need.">
+    <meta name="keywords" content="e-commerce, shop, buy, products, online store">
+    <title>{% block title %}Awesome Shop{% endblock %}</title>
+
+    <!-- Shabnam font -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rastikerdar/shabnam-font@v5.0.1/dist/font-face.css" integrity="sha384-HzsyKsXFRn7Rd4kzWqY9ooAl0BFk6dJViOB0iCplRW4WPiziThd9q38yGZPBe4kO" crossorigin="anonymous" rel="stylesheet" type="text/css">
+
+    {% block Bootstrap %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    {% endblock %}
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <!-- Static CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <style>
+        /* ============================================
+           ICE-DARK PALETTE (Nothing Phone Style)
+           Global Styles for All Pages
+        ============================================ */
+        :root {
+            --bg-primary: #000000;      /* Pure Black */
+            --bg-card: #121212;          /* Graphite Dark */
+            --text-primary: #FFFFFF;     /* Pure White */
+            --text-secondary: #8E8E93;   /* Muted Gray */
+            --accent-powder: #E0F2FE;    /* Icy Blue (5% usage) */
+            --accent-metallic: #B9E6FF;  /* Metallic Icy Blue (Hover/Actions) */
+        }
+
+        /* Base Reset - Applied to all pages */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-secondary);
+            font-family: 'Shabnam', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            letter-spacing: -0.01em;
+            line-height: 1.6;
+            direction: rtl;
+        }
+
+        /* Typography - Global */
+        h1, h2, h3, h4, h5, h6,
+        .h1, .h2, .h3, .h4, .h5, .h6 {
+            color: var(--text-primary);
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        /* Links */
+        a {
+            color: var(--accent-powder);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-metallic);
+        }
+
+        /* Navbar - Global (overrides navbar-custom) */
+        .navbar-custom, .navbar {
+            background-color: var(--bg-card) !important;
+            border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+        }
+
+        .navbar-brand {
+            color: var(--text-primary) !important;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            transition: all 0.2s ease;
+        }
+
+        .navbar-brand:hover {
+            color: var(--accent-powder) !important;
+            transform: scale(1.02);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text-secondary) !important;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            transition: all 0.2s ease;
+            border-radius: 12px;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-powder) !important;
+            background-color: rgba(224, 242, 254, 0.08);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: var(--accent-powder) !important;
+            background-color: rgba(224, 242, 254, 0.12);
+        }
+
+        /* Form Controls - Global */
+        .form-control {
+            background-color: var(--bg-primary);
+            border: 1px solid rgba(142, 142, 147, 0.2);
+            border-radius: 12px;
+            color: var(--text-primary);
+            padding: 10px 14px;
+            transition: all 0.2s ease;
+        }
+
+        .form-control:focus {
+            background-color: var(--bg-primary);
+            border-color: var(--accent-powder);
+            box-shadow: 0 0 0 3px rgba(224, 242, 254, 0.1);
+            color: var(--text-primary);
+            outline: none;
+        }
+
+        .form-control::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* Buttons - Global */
+        .btn {
+            border-radius: 40px;
+            padding: 0.5rem 1.25rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+        }
+
+        .btn-outline-primary {
+            color: var(--accent-powder);
+            border-color: var(--accent-powder);
+            background-color: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--accent-metallic);
+            border-color: var(--accent-metallic);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            border: 1px solid var(--accent-powder);
+            color: var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-metallic);
+            border-color: var(--accent-metallic);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--accent-powder);
+            color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-metallic);
+            border-color: var(--accent-metallic);
+            color: var(--bg-primary);
+            transform: translateY(-1px);
+        }
+
+        .btn-dark {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(142, 142, 147, 0.2);
+            color: var(--text-primary);
+        }
+
+        .btn-dark:hover {
+            background-color: var(--accent-metallic);
+            border-color: var(--accent-metallic);
+            color: var(--bg-primary);
+        }
+
+        /* Carousel - Global */
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+        }
+
+        .carousel-caption h1, 
+        .carousel-caption p {
+            color: var(--text-primary);
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(18, 18, 18, 0.7);
+            border-radius: 50%;
+            padding: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-control-prev-icon:hover,
+        .carousel-control-next-icon:hover {
+            background-color: var(--accent-metallic);
+            transform: scale(1.1);
+        }
+
+        .carousel-indicators button {
+            background-color: var(--text-secondary);
+            border-radius: 20px;
+            transition: all 0.2s ease;
+        }
+
+        .carousel-indicators button.active {
+            background-color: var(--accent-powder);
+            width: 30px;
+        }
+
+        /* Featurettes - Global */
+        .featurette-heading {
+            font-weight: 600;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .featurette-divider {
+            margin: 3rem 0;
+            border-top: 1px solid rgba(142, 142, 147, 0.15);
+        }
+
+        .featurette {
+            margin-bottom: 3rem;
+        }
+
+        .featurette img {
+            border-radius: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .featurette img:hover {
+            transform: scale(1.02);
+        }
+
+        .lead {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer - Global */
+        footer {
+            background-color: var(--bg-card) !important;
+            color: var(--text-secondary);
+            padding: 2rem 0;
+            margin-top: 60px;
+            border-top: 1px solid rgba(142, 142, 147, 0.15);
+        }
+
+        footer a {
+            color: var(--accent-powder);
+            transition: all 0.2s ease;
+        }
+
+        footer a:hover {
+            color: var(--accent-metallic);
+            text-decoration: none;
+        }
+
+        footer .float-end a {
+            color: var(--accent-powder);
+        }
+
+        footer .float-end a:hover {
+            color: var(--accent-metallic);
+        }
+
+        /* Avatar - Global */
+        .Avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border: 1px solid rgba(224, 242, 254, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .Avatar:hover {
+            border-color: var(--accent-powder);
+            transform: scale(1.05);
+        }
+
+        /* Dropdown Menu - Global */
+        .dropdown-menu {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(142, 142, 147, 0.15);
+            border-radius: 16px;
+            backdrop-filter: blur(12px);
+            padding: 0.5rem 0;
+        }
+
+        .dropdown-header {
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+        }
+
+        .dropdown-item {
+            color: var(--text-secondary);
+            transition: all 0.2s ease;
+            padding: 0.5rem 1rem;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(224, 242, 254, 0.08);
+            color: var(--accent-powder);
+        }
+
+        .dropdown-divider {
+            border-top-color: rgba(142, 142, 147, 0.15);
+        }
+
+        /* Login Link - Global */
+        .login {
+            color: var(--accent-powder);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            border: 1px solid var(--accent-powder);
+            transition: all 0.2s ease;
+            margin-right: 25px;
+            margin-left: 5px;
+        }
+
+        .login:hover {
+            background-color: var(--accent-metallic);
+            color: var(--bg-primary);
+        }
+
+        /* Cards - Global */
+        .card {
+            background-color: var(--bg-card);
+            border: none;
+            border-radius: 20px;
+            transition: all 0.25s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-body {
+            padding: 1.25rem;
+        }
+
+        .card-title {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .card-text {
+            color: var(--text-secondary);
+        }
+
+        /* Tables - Global */
+        .table {
+            color: var(--text-secondary);
+            background-color: transparent;
+        }
+
+        .table thead th {
+            color: var(--text-primary);
+            border-bottom-color: rgba(142, 142, 147, 0.2);
+        }
+
+        .table tbody tr {
+            background-color: var(--bg-card);
+            transition: all 0.2s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: #1a1a1a;
+        }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: rgba(18, 18, 18, 0.8);
+        }
+
+        /* Modals - Global */
+        .modal-content {
+            background-color: var(--bg-card);
+            border: 1px solid rgba(224, 242, 254, 0.15);
+            border-radius: 28px;
+            backdrop-filter: blur(20px);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+        }
+
+        .modal-header .modal-title {
+            color: var(--text-primary);
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1) brightness(2);
+            opacity: 0.7;
+            transition: all 0.2s ease;
+        }
+
+        .modal-header .btn-close:hover {
+            opacity: 1;
+            transform: rotate(90deg);
+        }
+
+        .modal-footer {
+            border-top: 1px solid rgba(142, 142, 147, 0.15);
+        }
+
+        /* Utility Classes */
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+
+        .text-dark {
+            color: var(--text-primary) !important;
+        }
+
+        .bg-dark {
+            background-color: var(--bg-card) !important;
+        }
+
+        .bg-light {
+            background-color: var(--bg-primary) !important;
+        }
+
+        /* Scrollbar Styling (Nothing Phone Style) */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--text-secondary);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-powder);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 1.2rem;
+            }
+            
+            .featurette-heading {
+                font-size: 1.5rem;
+            }
+            
+            .lead {
+                font-size: 1rem;
+            }
+            
+            .carousel-caption {
+                padding: 1rem;
+            }
+        }
+
+        {% block style %}
+        {% endblock %}
+    </style>
+</head>
+
+<body>
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+
+    <!-- Optional JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    {# Link custom JS files here #}
+    {% block js %}{% endblock %}
+</body>
+</html>

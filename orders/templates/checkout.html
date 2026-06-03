@@ -1,0 +1,531 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load bootstrap4 %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block Bootstrap %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/5.0/examples/carousel/carousel.rtl.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+{% endblock %}
+
+{% block style %}
+    /* ============================================
+       ICE-DARK PALETTE (Nothing Phone Style)
+    ============================================ */
+    :root {
+        --bg-primary: #000000;      /* Pure Black */
+        --bg-card: #121212;          /* Graphite Dark */
+        --text-primary: #FFFFFF;     /* Pure White */
+        --text-secondary: #8E8E93;   /* Muted Gray */
+        --accent-powder: #E0F2FE;    /* Icy Blue (5% usage) */
+        --accent-metallic: #B9E6FF;  /* Metallic Icy Blue (Hover/Actions) */
+    }
+
+    /* Base Reset */
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-secondary);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        letter-spacing: -0.01em;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6, .page-header h2 {
+        color: var(--text-primary);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+    }
+
+    .page-header {
+        margin: 30px 0 20px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: var(--bg-card) !important;
+        border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+        backdrop-filter: blur(10px);
+    }
+
+    .navbar-brand {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+    }
+
+    .navbar-brand:hover {
+        color: var(--accent-powder) !important;
+    }
+
+    .nav-link {
+        color: var(--text-secondary) !important;
+        transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--accent-powder) !important;
+    }
+
+    .nav-link.active {
+        color: var(--accent-powder) !important;
+    }
+
+    /* Search Form */
+    .form-control {
+        background-color: var(--bg-card);
+        border: 1px solid rgba(142, 142, 147, 0.2);
+        border-radius: 12px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+        background-color: var(--bg-card);
+        border-color: var(--accent-powder);
+        box-shadow: 0 0 0 2px rgba(224, 242, 254, 0.1);
+        color: var(--text-primary);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-secondary);
+    }
+
+    .btn-outline-primary {
+        color: var(--accent-powder);
+        border-color: var(--accent-powder);
+        border-radius: 40px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--accent-metallic);
+        border-color: var(--accent-metallic);
+        color: var(--bg-primary);
+    }
+
+    /* Avatar Dropdown */
+    .Avatar {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 1px solid rgba(224, 242, 254, 0.3);
+        transition: all 0.2s ease;
+    }
+
+    .Avatar:hover {
+        border-color: var(--accent-powder);
+        transform: scale(1.05);
+    }
+
+    .dropdown-menu {
+        background-color: var(--bg-card);
+        border: 1px solid rgba(142, 142, 147, 0.15);
+        border-radius: 16px;
+        backdrop-filter: blur(12px);
+    }
+
+    .dropdown-header {
+        color: var(--text-primary);
+    }
+
+    .dropdown-item {
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: rgba(224, 242, 254, 0.08);
+        color: var(--accent-powder);
+    }
+
+    .dropdown-divider {
+        border-top-color: rgba(142, 142, 147, 0.15);
+    }
+
+    /* Main Content */
+    main.container-fluid {
+        margin-top: 80px;
+        padding: 20px 40px;
+    }
+
+    /* List Group (Address Selection) */
+    .list-group {
+        margin-bottom: 30px;
+    }
+
+    .list-group-item {
+        background-color: var(--bg-card);
+        border: none;
+        border-radius: 20px !important;
+        margin-bottom: 12px;
+        padding: 20px;
+        transition: all 0.2s ease;
+    }
+
+    .list-group-item:hover {
+        background-color: #1a1a1a;
+        transform: translateX(-4px);
+    }
+
+    .list-group-item-heading {
+        width: 100%;
+    }
+
+    /* Radio Buttons */
+    .form-check {
+        display: flex;
+        align-items: center;
+    }
+
+    .form-check label {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+    }
+
+    input[type="radio"] {
+        width: 18px;
+        height: 18px;
+        accent-color: var(--accent-powder);
+        cursor: pointer;
+    }
+
+    /* Address Details */
+    dl.dl-small {
+        margin: 0;
+    }
+
+    dl.dl-small dt {
+        color: var(--text-primary);
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    dl.dl-small dd {
+        color: var(--text-secondary);
+        margin-bottom: 5px;
+    }
+
+    /* Form Fields for New Address */
+    form[role="form"] {
+        margin-top: 10px;
+    }
+
+    form[role="form"] .form-group {
+        margin-bottom: 15px;
+    }
+
+    form[role="form"] label {
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+        display: block;
+    }
+
+    form[role="form"] input,
+    form[role="form"] select,
+    form[role="form"] textarea {
+        background-color: var(--bg-primary);
+        border: 1px solid rgba(142, 142, 147, 0.2);
+        border-radius: 12px;
+        color: var(--text-primary);
+        padding: 10px 14px;
+        width: 100%;
+        transition: all 0.2s ease;
+    }
+
+    form[role="form"] input:focus,
+    form[role="form"] select:focus,
+    form[role="form"] textarea:focus {
+        outline: none;
+        border-color: var(--accent-powder);
+        box-shadow: 0 0 0 2px rgba(224, 242, 254, 0.1);
+    }
+
+    /* Delete Address Link */
+    .text-danger {
+        color: var(--text-secondary) !important;
+        transition: all 0.2s ease;
+    }
+
+    .text-danger:hover {
+        color: var(--accent-powder) !important;
+    }
+
+    /* Bank Logos & Payment Method */
+    .bank_logo {
+        border-radius: 12px;
+        transition: transform 0.2s ease;
+    }
+
+    .bank_logo:hover {
+        transform: scale(1.02);
+    }
+
+    .radio label {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .radio p {
+        margin: 0;
+        color: var(--text-secondary);
+    }
+
+    /* Well / Payment Button Container */
+    .well {
+        background-color: var(--bg-card);
+        border-radius: 20px;
+        padding: 25px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .btn-success {
+        background-color: transparent;
+        border: 1px solid var(--accent-powder);
+        border-radius: 40px;
+        padding: 12px 30px;
+        color: var(--text-primary);
+        font-weight: 600;
+        transition: all 0.2s ease;
+    }
+
+    .btn-success:hover {
+        background-color: var(--accent-metallic);
+        border-color: var(--accent-metallic);
+        color: var(--bg-primary);
+        transform: translateY(-2px);
+    }
+
+    .btn-sm {
+        border-radius: 40px;
+        padding: 6px 16px;
+        font-size: 0.85rem;
+    }
+
+    .btn-dark {
+        background-color: transparent;
+        border: 1px solid var(--accent-powder);
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+    }
+
+    .btn-dark:hover {
+        background-color: var(--accent-metallic);
+        border-color: var(--accent-metallic);
+        color: var(--bg-primary);
+    }
+
+    /* Footer */
+    footer.container {
+        margin-top: 60px;
+        padding: 20px;
+        color: var(--text-secondary);
+    }
+
+    .featurette-divider {
+        border-top-color: rgba(142, 142, 147, 0.15);
+    }
+
+    footer .float-end a {
+        color: var(--accent-powder);
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    footer .float-end a:hover {
+        color: var(--accent-metallic);
+    }
+
+    /* Utility Classes */
+    .row.radio {
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        main.container-fluid {
+            padding: 20px 15px;
+        }
+        
+        .row > div {
+            margin-bottom: 15px;
+        }
+        
+        .radio label {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+{% endblock %}
+
+{% block content %}
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">بازار</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'products' %}">فروشگاه</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">درباره ما</a>
+          </li>
+        </ul>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="جستجو">
+          <button class="btn btn-outline-primary" type="submit">جستجو</button>
+        </form>
+
+        <a href="{% url 'basket' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="var(--text-primary)" class="bi bi-cart3" viewBox="0 0 16 16" style="margin-right: 12px;">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </a>
+
+        <div class="dropstart">
+          <a class="btn dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="Avatar" alt="Avatar" src="/static/img/profile.png">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li>
+              <p class="dropdown-header"><b>{{ user }}</b></p>
+            </li>
+            <li><a class="dropdown-item" href="{% url 'profile' %}">حساب شخصی</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                {% endif %}
+                <button class="dropdown-item text-danger" type="submit">خروج</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main class="container-fluid">
+  <div class="page-header">
+    <h2>انتخاب نشانی ارسال</h2>
+  </div>
+  
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="list-group">
+        <form method="post" id="checkout" action="{% url 'create_order' %}">
+          {% csrf_token %}
+
+          {% for address in address_list %}
+          <div class="list-group-item">
+            <div class="list-group-item-heading">
+              <div class="row">
+                <div class="col-xs-3 form-check">
+                  <label>
+                    <input type="radio" name="address" value="{{ address.id }}">
+                    {{ address.province }} - {{ address.city }}
+                  </label>
+                </div>
+                <div class="col-xs-5">
+                  <dl class="dl-small">
+                    <dt>{{ address.address }}</dt>
+                    <dd>کد پستی: {{ address.postcode }}</dd>
+                  </dl>
+                  <a class="btn btn-sm text-danger" href="{% url 'delete_address' address.id %}">حذف نشانی</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </form>
+
+        {% if address_list|length < 2 %}
+        <div class="list-group-item">
+          <div class="list-group-item-heading">
+            <div class="row">
+              <div class="col-xs-3">
+                <div>
+                  <label>آدرس جدید</label>
+                </div>
+              </div>
+              <div class="col-xs-9">
+                <form role="form" method="post" action="{% url 'checkout' %}">
+                  {% csrf_token %}
+                  {% bootstrap_form form %}
+                  <button class="btn btn-sm btn-dark" type="submit">ذخیره</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <h2>انتخاب درگاه پرداخت</h2>
+      <div class="list-group">
+        <div class="list-group-item">
+          <div class="list-group-item-heading">
+            <div class="row radio">
+              <div class="col-xs-3">
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                  <img class="bank_logo" src="{% static 'img/checkout/mellat_bank.webp' %}" height="60" alt="بانک ملت">
+                  <p>درگاه بانک ملت | پرداخت آنلاین توسط درگاه بانک ملت</p>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="list-group-item">
+          <div class="list-group-item-heading">
+            <div class="row radio">
+              <div class="col-xs-3">
+                <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                  <img class="bank_logo" src="{% static 'img/checkout/saman_bank.webp' %}" height="60" alt="بانک سامان">
+                  <p>درگاه بانک سامان | پرداخت آنلاین توسط درگاه بانک سامان</p>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="well">
+        <button type="submit" form="checkout" class="btn btn-success btn-lg btn-block">پرداخت آنلاین</button>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="container">
+  <hr class="featurette-divider">
+  <p class="float-end"><a href="#">بازگشت به بالا</a></p>
+  <p>2021–2020 &copy; حقوق مطالب، تصاویر و طرح قالب برای سایت بازار محفوظ است.</p>
+</footer>
+{% endblock %}

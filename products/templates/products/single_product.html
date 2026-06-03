@@ -1,0 +1,586 @@
+{% extends 'base.html' %}
+{% block header %}{% endblock %}
+
+{% block Bootstrap %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.rtl.min.css" integrity="sha384-gXt9imSW0VcJVHezoNQsP+TNrjYXoGcrqBZJpry9zJt8PCQjobwmhMGaDHTASo9N" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/products.css">
+    {#    <link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">#}
+    {#    <link rel="stylesheet" type="text/css" href="assets/css/slick-theme.css">#}
+{% endblock %}
+
+{% block title %}Product{% endblock %}
+
+{% block style %}
+    /* ============================================
+       ICE-DARK PALETTE (Nothing Phone Style)
+    ============================================ */
+    :root {
+        --bg-primary: #000000;      /* Pure Black */
+        --bg-card: #121212;          /* Graphite Dark */
+        --text-primary: #FFFFFF;     /* Pure White */
+        --text-secondary: #8E8E93;   /* Muted Gray */
+        --accent-powder: #E0F2FE;    /* Icy Blue (5% usage) */
+        --accent-metallic: #B9E6FF;  /* Metallic Icy Blue (Hover/Actions) */
+    }
+
+    /* Base Reset */
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-secondary);
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        letter-spacing: -0.01em;
+    }
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6, .h2 {
+        color: var(--text-primary);
+        font-weight: 500;
+        letter-spacing: -0.02em;
+    }
+
+    .h2 {
+        font-size: 1.5rem;
+    }
+
+    .h3 {
+        color: var(--accent-powder);
+    }
+
+    /* Navbar */
+    .navbar {
+        background-color: var(--bg-card) !important;
+        border-bottom: 1px solid rgba(142, 142, 147, 0.15);
+        backdrop-filter: blur(10px);
+    }
+
+    .navbar-brand {
+        color: var(--text-primary) !important;
+        font-weight: 500;
+        letter-spacing: -0.5px;
+    }
+
+    .navbar-brand:hover {
+        color: var(--accent-powder) !important;
+    }
+
+    .nav-link {
+        color: var(--text-secondary) !important;
+        transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+        color: var(--accent-powder) !important;
+    }
+
+    .nav-link.active {
+        color: var(--accent-powder) !important;
+    }
+
+    /* Search Form */
+    .form-control {
+        background-color: var(--bg-primary);
+        border: 1px solid rgba(142, 142, 147, 0.2);
+        border-radius: 12px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+        background-color: var(--bg-primary);
+        border-color: var(--accent-powder);
+        box-shadow: 0 0 0 2px rgba(224, 242, 254, 0.1);
+        color: var(--text-primary);
+    }
+
+    .form-control::placeholder {
+        color: var(--text-secondary);
+    }
+
+    .btn-outline-primary {
+        color: var(--accent-powder);
+        border-color: var(--accent-powder);
+        border-radius: 40px;
+        transition: all 0.2s ease;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: var(--accent-metallic);
+        border-color: var(--accent-metallic);
+        color: var(--bg-primary);
+    }
+
+    /* Avatar Dropdown */
+    .Avatar {
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        margin-right: 5px;
+        border: 1px solid rgba(224, 242, 254, 0.3);
+        transition: all 0.2s ease;
+        object-fit: cover;
+    }
+
+    .Avatar:hover {
+        border-color: var(--accent-powder);
+        transform: scale(1.05);
+    }
+
+    .dropdown-menu {
+        background-color: var(--bg-card);
+        border: 1px solid rgba(142, 142, 147, 0.15);
+        border-radius: 16px;
+        backdrop-filter: blur(12px);
+    }
+
+    .dropdown-header {
+        color: var(--text-primary);
+    }
+
+    .dropdown-item {
+        color: var(--text-secondary);
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: rgba(224, 242, 254, 0.08);
+        color: var(--accent-powder);
+    }
+
+    .dropdown-divider {
+        border-top-color: rgba(142, 142, 147, 0.15);
+    }
+
+    .dropdown-item.text-danger {
+        background: none !important;
+        border: none;
+        padding: 0 !important;
+        color: var(--accent-powder) !important;
+        text-decoration: none;
+        cursor: pointer;
+        width: 100%;
+        text-align: right;
+        padding: 0.5rem 1rem !important;
+    }
+
+    .dropdown-item.text-danger:hover {
+        background-color: rgba(224, 242, 254, 0.08) !important;
+        color: var(--accent-metallic) !important;
+    }
+
+    .login {
+        margin-right: 25px;
+        margin-left: 5px;
+        color: var(--accent-powder);
+        text-decoration: none;
+        padding: 8px 16px;
+        border-radius: 40px;
+        border: 1px solid var(--accent-powder);
+        transition: all 0.2s ease;
+    }
+
+    .login:hover {
+        background-color: var(--accent-metallic);
+        color: var(--bg-primary);
+    }
+
+    /* Main Content */
+    .bg-light {
+        background-color: var(--bg-primary) !important;
+    }
+
+    section {
+        margin-top: 80px;
+    }
+
+    /* Product Cards */
+    .card {
+        background-color: var(--bg-card);
+        border: none;
+        border-radius: 20px;
+        transition: all 0.25s ease;
+        overflow: hidden;
+    }
+
+    .card:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-img {
+        border-radius: 20px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    /* Product Details */
+    .text-muted {
+        color: var(--text-secondary) !important;
+    }
+
+    .text-dark {
+        color: var(--text-primary) !important;
+    }
+
+    .badge.bg-secondary {
+        background-color: var(--bg-primary) !important;
+        color: var(--text-primary);
+        border: 1px solid rgba(142, 142, 147, 0.2);
+        border-radius: 12px;
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+
+    /* Buttons */
+    .btn-primary {
+        background-color: transparent;
+        border: 1px solid var(--accent-powder);
+        border-radius: 40px;
+        color: var(--text-primary);
+        transition: all 0.2s ease;
+        padding: 8px 20px;
+    }
+
+    .btn-primary:hover {
+        background-color: var(--accent-metallic);
+        border-color: var(--accent-metallic);
+        color: var(--bg-primary);
+        transform: translateY(-2px);
+    }
+
+    .btn-lg {
+        padding: 12px 30px;
+        font-weight: 600;
+    }
+
+    #btn-minus, #btn-plus {
+        cursor: pointer;
+        padding: 8px 16px;
+        margin: 0 5px;
+    }
+
+    #var-value {
+        display: inline-block;
+        min-width: 40px;
+        text-align: center;
+    }
+
+    /* Carousel Controls */
+    .carousel-multi-item {
+        position: relative;
+    }
+
+    .product-links-wap .col-4 {
+        padding: 5px;
+    }
+
+    .product-links-wap img {
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border-radius: 12px;
+    }
+
+    .product-links-wap img:hover {
+        transform: scale(1.05);
+        border: 1px solid var(--accent-powder);
+    }
+
+    .bi-arrow-right-circle-fill, .bi-arrow-left-circle-fill {
+        fill: var(--accent-powder);
+        transition: all 0.2s ease;
+    }
+
+    .bi-arrow-right-circle-fill:hover, .bi-arrow-left-circle-fill:hover {
+        fill: var(--accent-metallic);
+        transform: scale(1.1);
+    }
+
+    /* Featurette Divider */
+    .featurette-divider {
+        border-top-color: rgba(142, 142, 147, 0.15);
+        margin: 50px 0;
+    }
+
+    hr {
+        margin-top: 50px;
+        border-top-color: rgba(142, 142, 147, 0.15);
+    }
+
+    /* Footer */
+    footer.container {
+        margin-top: 60px;
+        padding: 20px;
+        color: var(--text-secondary);
+    }
+
+    footer .float-end a {
+        color: var(--accent-powder);
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
+    footer .float-end a:hover {
+        color: var(--accent-metallic);
+    }
+
+    /* Pagination (if used) */
+    .pagination {
+        display: inline-block;
+    }
+
+    .pagination a {
+        color: var(--text-secondary);
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: 1px solid rgba(142, 142, 147, 0.2);
+        background-color: var(--bg-card);
+        margin: 0 4px;
+        border-radius: 12px;
+    }
+
+    .pagination a:hover {
+        background-color: var(--accent-metallic);
+        border-color: var(--accent-metallic);
+        color: var(--bg-primary);
+    }
+
+    /* Utility Classes */
+    .list-inline-item {
+        margin: 0 5px;
+    }
+
+    @media (max-width: 768px) {
+        .col-lg-5, .col-lg-7 {
+            margin-top: 20px !important;
+        }
+        
+        .btn-lg {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+        }
+        
+        .row.pb-3 {
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .col.d-grid {
+            margin-bottom: 10px;
+        }
+    }
+{% endblock %}
+
+{% block content %}
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">بازار</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav me-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'products' %}">فروشگاه</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">درباره ما</a>
+          </li>
+        </ul>
+
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="جستجو" aria-label="جستجو">
+          <button class="btn btn-outline-primary" type="submit">جستجو</button>
+        </form>
+
+        <a href="{% url 'basket' %}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="var(--text-primary)" class="bi bi-cart3" viewBox="0 0 16 16" style="margin-right: 12px;">
+            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+          </svg>
+        </a>
+
+        {% if user.is_authenticated %}
+        <div class="dropstart">
+          <a class="btn dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            <img class="Avatar" alt="Avatar" src="/static/img/profile.png">
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li>
+              <p class="dropdown-header"><b>{{ user }}</b></p>
+            </li>
+            <li><a class="dropdown-item" href="{% url 'profile' %}">حساب شخصی</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <form method="post" action="{% url 'account_logout' %}">
+                {% csrf_token %}
+                {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}">
+                {% endif %}
+                <button class="dropdown-item text-danger" type="submit">خروج</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        {% else %}
+        <a class="login link-light" href="{% url 'account_login' %}">ورود</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- Open Content -->
+  <section>
+    <div class="container pb-5">
+      <div class="row">
+        <div class="col-lg-5 mt-5">
+          <div class="card mb-3">
+            <img class="card-img img-fluid" src="/{{ product.image.first.image }}" alt="Card image cap" id="product-detail">
+          </div>
+          <div class="row">
+            <!--Start Controls-->
+            <div class="col-1 align-self-center">
+              <a href="#multi-item-example" role="button" data-bs-slide="prev">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+              </a>
+            </div>
+            <!--End Controls-->
+
+            <!--Start Carousel Wrapper-->
+            <div id="multi-item-example" class="col-10 carousel slide carousel-multi-item" data-bs-ride="carousel">
+              <!--Start Slides-->
+              <div class="carousel-inner product-links-wap" role="listbox">
+                <!--First slide-->
+                <div class="carousel-item active">
+                  <div class="row">
+                    {% for item in product.image.all %}
+                      {% if forloop.counter <= 3 %}
+                        <div class="col-4">
+                          <a href="#">
+                            <img class="card-img img-fluid" src="/{{ item.image }}" alt="Product Image {{ forloop.counter }}">
+                          </a>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <!--/.First slide-->
+
+                <!--Second slide-->
+                <div class="carousel-item">
+                  <div class="row">
+                    {% for item in product.image.all %}
+                      {% if forloop.counter > 3 %}
+                        <div class="col-4">
+                          <a href="#">
+                            <img class="card-img img-fluid" src="/{{ item.image }}" alt="Product Image {{ forloop.counter }}">
+                          </a>
+                        </div>
+                      {% endif %}
+                    {% endfor %}
+                  </div>
+                </div>
+                <!--/.Second slide-->
+              </div>
+              <!--End Slides-->
+            </div>
+            <!--End Carousel Wrapper-->
+
+            <!--Start Controls-->
+            <div class="col-1 align-self-center">
+              <a href="#multi-item-example" role="button" data-bs-slide="next">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-arrow-left-circle-fill" viewBox="0 0 16 16">
+                  <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+                </svg>
+              </a>
+            </div>
+            <!--End Controls-->
+          </div>
+        </div>
+        <!-- col end -->
+        
+        <div class="col-lg-7 mt-5">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="h2">{{ product.title }}</h1>
+              <p class="h3 py-2">{{ product.price }} تومان</p>
+              <p class="py-2">
+                <span class="list-inline-item text-dark"><b>امتیاز:</b> {{ product.rate }}</span>
+              </p>
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <h6>فروشنده:</h6>
+                </li>
+                <li class="list-inline-item">
+                  <p class="text-muted"><strong>{{ product.seller }}</strong></p>
+                </li>
+              </ul>
+
+              <h6>توضیحات:</h6>
+              <p style="text-align:justify;">{{ product.description|linebreaksbr }}</p>
+              
+              <ul class="list-inline">
+                <li class="list-inline-item">
+                  <h6>موجودی در انبار:</h6>
+                </li>
+                <li class="list-inline-item">
+                  <p class="text"><strong id="count">{{ product.count }}</strong></p>
+                </li>
+              </ul>
+
+              <form action="{% url 'add_to_basket' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="product-id" value="{{ product.id }}">
+                <input type="hidden" name="product-slug" value="{{ product.slug }}">
+                <div class="row">
+                  <div class="col-auto">
+                    <ul class="list-inline pb-3">
+                      <li class="list-inline-item text-right">
+                        تعداد
+                        <input type="hidden" name="product-quanity" id="product-quanity" value="1">
+                      </li>
+                      <li class="list-inline-item"><span class="btn btn-primary" id="btn-minus">-</span></li>
+                      <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
+                      <li class="list-inline-item"><span class="btn btn-primary" id="btn-plus">+</span></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="row pb-3">
+                  <div class="col d-grid">
+                    <a style="height: 50px;" href="{% url 'basket' %}" class="btn btn-primary"><span class="btn-lg">خرید</span></a>
+                  </div>
+                  <div class="col d-grid">
+                    {% if product.count == 0 %}
+                      <button type="button" class="btn btn-primary btn-lg" name="submit" value="addtocard">افزودن به سبد</button>
+                    {% else %}
+                      <button type="submit" class="btn btn-primary btn-lg" name="submit" value="addtocard">افزودن به سبد</button>
+                    {% endif %}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="featurette-divider">
+    </div>
+  </section>
+  <!-- Close Content -->
+
+  <script src="/static/js/templatemo.js"></script>
+
+  <!-- FOOTER -->
+  <footer class="container">
+    <p class="float-end"><a href="#">بازگشت به بالا</a></p>
+    <p>2021–2020 &copy; حقوق مطالب، تصاویر و طرح قالب برای سایت بازار محفوظ است.</p>
+  </footer>
+</main>
+{% endblock %}
