@@ -1,6 +1,3 @@
-# ice-dark-shop
-❄️ A premium, ultra-minimalist open-source e-commerce storefront. Driven by Nothing Phone UI aesthetics, wrapped in a pure black layout with high-contrast ice-blue accents. No visual noise.
-
 # ❄️ ice-dark-shop
 
 An ultra-minimalist, high-fidelity open-source e-commerce storefront architecture. Designed for maximum scannability, extreme dark-mode contrast, and zero visual noise.
