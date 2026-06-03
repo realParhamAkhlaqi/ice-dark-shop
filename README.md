@@ -21,7 +21,7 @@ An e-commerce website using  the following tech stacks: Python - Django - Postg
 ### Clone the repository
 
 ```bash
-git clone https://github.com/erfanghorbanee/Django-Ecommerce.git
+git clone https://github.com/realParhamAkhlaqi/ice-dark-shop.git
 cd django-ecommerce
 ```
 
